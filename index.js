@@ -13,7 +13,7 @@ function displaySearchData(data) {
 	// console.log(data.hits[0].recipe.image);
 	// console.log(`<img src="${data.hits[0].recipe.image}">`);
 	// debugger;
-	$(".js-search-results").html(`<a class="url" href= "${data.hits[0].recipe.url}">Chocolate</a> <img src= "${data.hits[0].recipe.image}">`); 
+	$(".js-search-results").html(`<a class="url" href= "${data.hits[0].recipe.url}">${data.q}</a> <img src= "${data.hits[0].recipe.image}">`); 
 }
 
 function watchSubmit() {
