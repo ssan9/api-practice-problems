@@ -4,16 +4,18 @@ function getDataFromApi(searchTerm, callback) {
 	const query = {
 		q : searchTerm
 	}
-
 	$.getJSON(EDAMAM_SEARCH_URL, query, callback)
 }
 
 function displaySearchData(data) {
-	// const results = data.hits[0].recipe.image;
-	// console.log(data.hits[0].recipe.image);
-	// console.log(`<img src="${data.hits[0].recipe.image}">`);
-	// debugger;
-	$(".js-search-results").html(`<a class="url" href= "${data.hits[0].recipe.url}">${data.q}</a> <img src= "${data.hits[0].recipe.image}">`); 
+	console.log(data)
+	var results = data.hits.map(function(recipeObject){
+		return `<a class="url" href= "${recipeObject.recipe.url}">
+		<h1>${recipeObject.recipe.label}</h1>
+		<img src= "${recipeObject.recipe.image}">
+		</a>`
+	})
+	$(".js-search-results").html( results.join("") );
 }
 
 function watchSubmit() {
@@ -21,9 +23,7 @@ function watchSubmit() {
 		event.preventDefault();
 		const query = $(".js-query-title").val();
 		$(".js-query-title").val("");
-		// debugger;
-	getDataFromApi(query, displaySearchData);
-
+		getDataFromApi(query, displaySearchData);
 	})
 }
 
